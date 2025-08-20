@@ -1438,7 +1438,7 @@ let package = Package(
 func googleAppMeasurementDependency() -> Package.Dependency {
   let appMeasurementURL = "https://github.com/google/GoogleAppMeasurement.git"
 
-  return .package(url: appMeasurementURL, branch: "nc/odm-2.2.2")
+  return .package(url: appMeasurementURL, branch: "nc/odm-2.2.3")
 
   // // Point SPM CI to the tip of main of https://github.com/google/GoogleAppMeasurement so that the
   // // release process can defer publishing the GoogleAppMeasurement tag until after testing.
