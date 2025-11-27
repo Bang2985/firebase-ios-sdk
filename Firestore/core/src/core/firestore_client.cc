@@ -373,9 +373,8 @@ void FirestoreClient::DisableNetwork(StatusCallback callback) {
     if (is_terminated()) {
       if (callback) {
         user_executor_->Execute([=] {
-          callback(util::Status(
-              firestore::Error::kErrorFailedPrecondition,
-              "The client has already been terminated."));
+          callback(util::Status(firestore::Error::kErrorFailedPrecondition,
+                                "The client has already been terminated."));
         });
       }
       return;
@@ -393,9 +392,8 @@ void FirestoreClient::EnableNetwork(StatusCallback callback) {
     if (is_terminated()) {
       if (callback) {
         user_executor_->Execute([=] {
-          callback(util::Status(
-              firestore::Error::kErrorFailedPrecondition,
-              "The client has already been terminated."));
+          callback(util::Status(firestore::Error::kErrorFailedPrecondition,
+                                "The client has already been terminated."));
         });
       }
       return;
@@ -473,9 +471,9 @@ void FirestoreClient::GetDocumentFromLocalCache(
     if (is_terminated()) {
       if (shared_callback) {
         user_executor_->Execute([=] {
-          shared_callback->OnEvent(Status(
-              Error::kErrorFailedPrecondition,
-              "The client has already been terminated."));
+          shared_callback->OnEvent(
+              Status(Error::kErrorFailedPrecondition,
+                     "The client has already been terminated."));
         });
       }
       return;
@@ -517,9 +515,9 @@ void FirestoreClient::GetDocumentsFromLocalCache(
     if (is_terminated()) {
       if (shared_callback) {
         user_executor_->Execute([=] {
-          shared_callback->OnEvent(Status(
-              Error::kErrorFailedPrecondition,
-              "The client has already been terminated."));
+          shared_callback->OnEvent(
+              Status(Error::kErrorFailedPrecondition,
+                     "The client has already been terminated."));
         });
       }
       return;
@@ -558,9 +556,8 @@ void FirestoreClient::WriteMutations(std::vector<Mutation>&& mutations,
     if (is_terminated()) {
       if (callback) {
         user_executor_->Execute([=] {
-          callback(util::Status(
-              firestore::Error::kErrorFailedPrecondition,
-              "The client has already been terminated."));
+          callback(util::Status(firestore::Error::kErrorFailedPrecondition,
+                                "The client has already been terminated."));
         });
       }
       return;
@@ -672,10 +669,9 @@ void FirestoreClient::LoadBundle(
       std::move(bundle_serializer), std::move(bundle_data));
   worker_queue_->Enqueue([this, reader, result_task] {
     if (is_terminated()) {
-      result_task->SetState(
-          0, 0, 0, 0,
-          Status(Error::kErrorFailedPrecondition,
-                 "The client has already been terminated."));
+      result_task->SetState(0, 0, 0, 0,
+                            Status(Error::kErrorFailedPrecondition,
+                                   "The client has already been terminated."));
       return;
     }
     sync_engine_->LoadBundle(std::move(reader), std::move(result_task));
